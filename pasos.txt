@@ -1,0 +1,112 @@
+Creamos las carpetas aplicaciones y templates en la raiz del proyecto.
+
+Creamos una app llamada blog dentro de la carpeta aplicaciones
+
+Modificamos el name dentro de la app en blog/apps.py como:
+
+name = 'aplicaciones.blog'
+
+Registramos la app blog en settings.py como:
+
+INSTALLED_APPS = [
+    ...
+    'aplicaciones.blog'
+]
+
+Configuramos el lenguaje:
+
+LANGUAGE_CODE = 'es-MX'
+
+Podemos correr las migraciones con:
+
+python3 manage.py makemigrations
+
+python3 manage.py migrate
+
+Y ver nuestro servidor local con:
+
+python3 manage.py runserver
+
+Cuando creamos nuestros modelos podemos registrarlos en el admin para ello podemos personalizar el como se ven usando una Admin Class:
+
+class <nombre del modelo>Admin(admin.ModelAdmin):
+...
+
+dentro de esta clase colocamos elementos como barras de busqueda o los elementos con los cuales se tabularan los registros en el admin site:
+
+# Barra de busqueda
+search_fields = ["nombres", "apellidos", "correo"]
+
+# Listado de campos para tabla
+list_display = ("nombres", "apellidos", "correo", "estado", "fecha_creacion")
+
+Despues registramos los modelos junto a su admin class todo esto en el admin.py de cada aplicacion:
+
+admin.site.register(Autor, AutorAdmin)
+
+En este proyecto se utilizara django_import_export para ello ejecutamos:
+
+pip install django-import-export
+
+y luego registramos en settings.py la app de import_export:
+
+# settings.py
+INSTALLED_APPS = (
+    ...
+    'import_export',
+)
+
+Para usarlo necesitamos dentro de admin.py hacer dos importaciones:
+
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+
+Despues se crea una clase que herede de resource.ModelResource y en la class Meta colocamos el modelo que lo usara.
+
+class CategoriaResource(resources.ModelResource):
+    class Meta:
+        model = Categoria
+
+Finalmente agregamos una herencia mas que es ImportExportModelAdmin y el atributo resource_class el cual es la clase rescource creada anteriormente:
+
+class CategoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    ...
+    resource_class = CategoriaResource
+
+Para texto enriquecido utilizamos ckeditor. Primero lo descargamos de pip:
+
+pip install django-ckeditor
+
+Agremos a las installed_apps:
+
+INSTALLED_APPS = [
+    ...
+    'ckeditor',
+]
+
+Y para usarlo necesitamos en el modelo a aplicar, importar su clase RichTextField y usarlo en el modelo que querramos tener con texto enriquecido:
+
+from ckeditor.fields import RichTextField
+
+class Post(models.Model):
+    ...
+    contenido = RichTextField()
+    ...
+
+Si queremos agregar archivos estaticos necesitamos configurar el settings.py para indicar donde se alojaran estos archivos, en nuestro caso estaran en la carpeta static en la base del proyecto:
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+Si queremos usarlos en nuestros templates debemos incluir al principio de todo la siguiente etiqueta:
+
+{% load static %}
+
+y con esto le indicamos a django que cargue los archivos estaticos y asi consumirlos usando:
+
+<link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+
