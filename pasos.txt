@@ -110,3 +110,13 @@ y con esto le indicamos a django que cargue los archivos estaticos y asi consumi
       rel="stylesheet"
     />
 
+Si necesitamos hacer consultas debemos utilizar get_object_or_404 de shortcuts para devolver un 404 en caso de no encontrar el objeto:
+
+from django.shortcuts import render, get_object_or_404
+
+post = get_object_or_404(Post, slug = slug)
+
+Si queremos hacer consultas que ignoren mayusculas o minusculas agregamos __iexact al parametro que querramos abarcar:
+
+Categoria.objects.get(nombre__iexact="Programacion")
+
