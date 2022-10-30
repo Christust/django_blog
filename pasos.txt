@@ -123,3 +123,22 @@ Categoria.objects.get(nombre__iexact="Programacion")
 Para desplegar a heroku por ejemplo necesitamos crear una carpeta llamada settings dentro de la carpeta del proyecto general o de la app llamada como el proyecto en si. Ahi crearemos el archivo __init__,py, base.py, local.py y production.py.
 
 En el archivo base.py colocaremos todo el archivo de settings.py menos la configuracion de la base de datos y las variables DEBBUG y ALLOWED_HOSTS y paralelamente en los archivos local y production colocaremos solo esas secciones anteriores mencionadas.
+
+Instalamos unicorn:
+
+pip install gunicorn
+
+Creamos un archivo Procfile en la base del proyecto y agregamos la siguiente linea:
+
+web: gunicorn <nombre del proyecto>.wsgi
+
+Si hemos creado un pipenv al momento de trabajar el proyecto podemos usar:
+
+pipenv run pip freeze > requirements.txt
+
+Para generar el requirements con todo lo necesario para el proyecto.
+
+Para crear la app desde heroku cli podemos situarnos en el proyecto y correr:
+
+heroku create <nombre del proyecto sin subguiones>
+
