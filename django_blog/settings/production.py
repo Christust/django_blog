@@ -26,3 +26,4 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+STATIC_ROOT = BASE_DIR / "static"
