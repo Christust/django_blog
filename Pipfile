@@ -10,6 +10,7 @@ django-ckeditor = "*"
 gunicorn = "*"
 psycopg2 = "*"
 dj-static = "*"
+whitenoise = "*"
 
 [dev-packages]
 
