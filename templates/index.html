@@ -109,6 +109,24 @@
         </div>
       </div>
     </header>
+    {% block barra_busqueda %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 search">
+          <form method="get">
+            <div id="custom-search-input">
+              <div class="input-group col-md-12">
+                <input type="text" class="form-control" placeholder="Buscar..." name="buscar" value="{{request.GET.buscar}}">
+                <span class="input-group-list">
+                  <i class="icon icon-search">
+                  <button class="boton btn-primary">Buscar</button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>{% endblock barra_busqueda %}
 
     <!-- Main Content -->
     <div class="container">
@@ -144,7 +162,25 @@
 
       </div>
     </div>
-
+    <div class="row">
+      <div class="col-12">
+        <div class="col-6 float-left">
+          {% if posts.has_previous %}
+            <div class="clearfix">
+              <a href="?page={{ posts.previous_page_number }}{% if request.GET.buscar %}&buscar={{ request.GET.buscar }}{% endif %}" class="btn btn-primary float-left">Anterior</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="col-6 float-right">
+      {% if posts.has_next %}
+            <div class="clearfix">
+              <a href="?page={{ posts.next_page_number }}{% if request.GET.buscar %}&buscar={{ request.GET.buscar }}{% endif %}" class="btn btn-primary float-left">Siguiente</a>
+            </div>
+          {% endif %}
+          </div></div>
+    </div>
     <hr />
 
     <!-- Footer -->
