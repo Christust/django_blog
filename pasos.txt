@@ -142,3 +142,16 @@ Para crear la app desde heroku cli podemos situarnos en el proyecto y correr:
 
 heroku create <nombre del proyecto sin subguiones>
 
+A su vez debemos agregar heroku a los remotos para poder subirlo con git usando:
+
+heroku git:remote -a <nombre de la app en heroku>
+
+Despues de eso podemos ejecutar:
+
+git push -u heroku master
+
+Si nos aparece un error de staticfiles debemos ejecutar el comando:
+
+heroku config:set DISABLE_COLLECTSTATIC=1
+
+y despues ya podremos volver a corre git push a heroku.
