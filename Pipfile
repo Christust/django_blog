@@ -9,6 +9,7 @@ django-import-export = "*"
 django-ckeditor = "*"
 gunicorn = "*"
 psycopg2 = "*"
+dj-static = "*"
 
 [dev-packages]
 

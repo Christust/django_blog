@@ -155,3 +155,37 @@ Si nos aparece un error de staticfiles debemos ejecutar el comando:
 heroku config:set DISABLE_COLLECTSTATIC=1
 
 y despues ya podremos volver a corre git push a heroku.
+
+Para configurar postgres colocamos:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'host',
+        'PORT': '5432',
+    }
+}
+
+En production y estos datos los sacamos de heroku en el ad onn de postgres en la seccion de settings y credentials.
+
+Seguido ejecutamos:
+
+heroku run python manage.py makemigrations
+
+heroku run python manage.py migrate
+
+
+Para servir los archivos estaticos descargamos dj-static esto para heroku e indicarle quien nos servira los archivos:
+
+pip install dj-static
+
+Posteriormente en el archivo wsgi.py colocamos en lugar de applicacion = ...
+
+escribimos:
+
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())

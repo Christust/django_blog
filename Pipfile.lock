@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "63bcf0ee7ec216a7a97b50de93c4a0a9f62e18d55a3e5d68383f3bd311526685"
+            "sha256": "b3a33780d61ae6794a95ae4b21739127d17e16d1e2d512ae2638513141fa1ca5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,13 @@
             ],
             "markers": "python_version >= '2.7'",
             "version": "==20200713"
+        },
+        "dj-static": {
+            "hashes": [
+                "sha256:032ec1c532617922e6e3e956d504a6fb1acce4fc1c7c94612d0fda21828ce8ef"
+            ],
+            "index": "pypi",
+            "version": "==0.0.6"
         },
         "django": {
             "hashes": [
@@ -185,6 +192,12 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
+        },
+        "static3": {
+            "hashes": [
+                "sha256:674641c64bc75507af2eb20bef7e7e3593dca993dec6674be108fa15b42f47c8"
+            ],
+            "version": "==0.7.0"
         },
         "tablib": {
             "extras": [
